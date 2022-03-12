@@ -8,6 +8,14 @@ function Formulario() {
       .min(3, 'El Nombre es muy corto')
       .max(20, 'El Nombre es muy largo')
       .required('El nombre del cliente es obligatorio'),
+    empresa: Yup.string().required('El nombre de la empresa es obligatorio'),
+    email: Yup.string()
+      .email('Email no válido')
+      .required('El email es obligatorio'),
+    telefono: Yup.number()
+      .positive('Número no válido')
+      .integer('Número no válido')
+      .typeError('El número no es válido'),
   });
 
   const handleSubmit = valores => {
@@ -63,6 +71,10 @@ function Formulario() {
                   placeholder="Empresa del Cliente"
                   name="empresa"
                 />
+
+                {errors.empresa && touched.empresa ? (
+                  <Alerta>{errors.empresa}</Alerta>
+                ) : null}
               </div>
               <div className="mb-4">
                 <label className="text-gray-800" htmlFor="email">
@@ -75,6 +87,10 @@ function Formulario() {
                   placeholder="Email del Cliente"
                   name="email"
                 />
+
+                {errors.email && touched.email ? (
+                  <Alerta>{errors.email}</Alerta>
+                ) : null}
               </div>
               <div className="mb-4">
                 <label className="text-gray-800" htmlFor="telefono">
@@ -87,6 +103,10 @@ function Formulario() {
                   placeholder="Telefono del Cliente"
                   name="telefono"
                 />
+
+                {errors.telefono && touched.telefono ? (
+                  <Alerta>{errors.telefono}</Alerta>
+                ) : null}
               </div>
               <div className="mb-4">
                 <label className="text-gray-800" htmlFor="notas">
