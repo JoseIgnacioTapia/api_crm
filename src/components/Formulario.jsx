@@ -2,8 +2,9 @@ import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Alerta from './Alerta';
+import Cliente from './Cliente';
 
-function Formulario() {
+function Formulario({ cliente }) {
   const navigate = useNavigate();
 
   const nuevoClienteSchema = Yup.object().shape({
@@ -51,12 +52,13 @@ function Formulario() {
 
       <Formik
         initialValues={{
-          nombre: '',
-          empresa: '',
-          email: '',
-          telefono: '',
-          notas: '',
+          nombre: cliente?.nombre ?? '',
+          empresa: cliente?.empresa ?? '',
+          email: cliente?.email ?? '',
+          telefono: cliente?.telefono ?? '',
+          notas: cliente?.notas ?? '',
         }}
+        enableReinitialize={true}
         onSubmit={async (values, { resetForm }) => {
           await handleSubmit(values);
 
@@ -157,5 +159,9 @@ function Formulario() {
     </div>
   );
 }
+
+Formulario.defaultProps = {
+  cliente: {},
+};
 
 export default Formulario;
