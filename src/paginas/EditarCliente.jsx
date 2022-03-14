@@ -29,7 +29,7 @@ const EditarCliente = () => {
         Utiliza este formulario para editar datos de un cliente
       </p>
 
-      <Formulario cliente={cliente} />
+      <Formulario cliente={cliente} cargando={cargando} />
     </>
   );
 };
