@@ -27,7 +27,9 @@ const VerClientes = () => {
 
   console.log(cargando);
 
-  return (
+  return Object.keys(cliente).length === 0 ? (
+    <p>No Hay Resultados</p>
+  ) : (
     <div>
       {cargando ? (
         'cargando...'
