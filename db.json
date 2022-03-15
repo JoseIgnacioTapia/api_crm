@@ -9,14 +9,6 @@
       "id": 1
     },
     {
-      "nombre": "thompson",
-      "empresa": "sasa",
-      "email": "test@test.com",
-      "telefono": "1234567",
-      "notas": "zzzzzzzzzz",
-      "id": 2
-    },
-    {
       "nombre": "walter white",
       "empresa": "soso",
       "email": "nachoman907@hotmail.com",
@@ -31,14 +23,6 @@
       "telefono": "21321414",
       "notas": "",
       "id": 4
-    },
-    {
-      "nombre": "Pepe Rompe",
-      "empresa": "Estacion Central",
-      "email": "nachoman907@hotmail.com",
-      "telefono": "1234567",
-      "notas": "Buscando un servidor",
-      "id": 5
     }
   ]
 }
