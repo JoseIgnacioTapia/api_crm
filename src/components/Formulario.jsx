@@ -1,11 +1,16 @@
 import { Formik, Form, Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  crearNuevoClienteAction,
+  editarClienteAction,
+} from '../actions/clienteActions';
 import * as Yup from 'yup';
 import Alerta from './Alerta';
-import Cliente from './Cliente';
 import Spinner from './Spinner';
 
 function Formulario({ cliente, cargando }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const nuevoClienteSchema = Yup.object().shape({
@@ -25,30 +30,16 @@ function Formulario({ cliente, cargando }) {
 
   const handleSubmit = async valores => {
     try {
-      let respuesta;
       if (cliente.id) {
         // Editando el registro
-        const url = `${import.meta.env.VITE_API_URL}/${cliente.id}`;
-        respuesta = await fetch(url, {
-          method: 'PUT',
-          body: JSON.stringify(valores),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const editandoCliente = () =>
+          dispatch(editarClienteAction(cliente.id, valores));
+        editandoCliente();
       } else {
         // Nuevo registro
-        const url = import.meta.env.VITE_API_URL;
-
-        respuesta = await fetch(url, {
-          method: 'POST',
-          body: JSON.stringify(valores),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const nuevoCliente = () => dispatch(crearNuevoClienteAction(valores));
+        nuevoCliente();
       }
-      await respuesta.json();
 
       navigate('/clientes');
     } catch (error) {

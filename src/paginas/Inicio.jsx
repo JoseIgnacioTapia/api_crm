@@ -1,42 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  obtenerClientesAction,
+  borrarClienteAction,
+} from '../actions/clienteActions';
 import Cliente from '../components/Cliente';
 
 const Inicio = () => {
-  const [clientes, setclientes] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const obtenerClientesAPI = async () => {
-      try {
-        const url = import.meta.env.VITE_API_URL;
-        const respuesta = await fetch(url);
-        const resultado = await respuesta.json();
-
-        setclientes(resultado);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    obtenerClientesAPI();
+    // Consultar API
+    const cargarClientes = () => dispatch(obtenerClientesAction());
+    cargarClientes();
   }, []);
 
-  const handleEliminar = async id => {
+  // Obtener el State
+  const clientes = useSelector(state => state.clientes.clientes);
+
+  const handleEliminar = id => {
     const confirmar = confirm('¿Desea eliminar este cliente?');
 
     if (confirmar) {
-      try {
-        const url = `${import.meta.env.VITE_API_URL}/${id}`;
-        const respuesta = await fetch(url, {
-          method: 'DELETE',
-        });
-
-        await respuesta.json();
-
-        const arrayClientes = clientes.filter(cliente => cliente.id !== id);
-        setclientes(arrayClientes);
-      } catch (error) {
-        console.log(error);
-      }
+      dispatch(borrarClienteAction(id));
     }
   };
 

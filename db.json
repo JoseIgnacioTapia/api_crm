@@ -1,16 +1,8 @@
 {
   "clientes": [
     {
-      "nombre": "lukather",
-      "empresa": "sasa",
-      "email": "test@test.com",
-      "telefono": "1234567",
-      "notas": "zzzzzzzzzz",
-      "id": 1
-    },
-    {
       "nombre": "walter white",
-      "empresa": "soso",
+      "empresa": "Pollo Hnos.",
       "email": "nachoman907@hotmail.com",
       "telefono": "1234567",
       "notas": "holaaaa",
@@ -23,6 +15,22 @@
       "telefono": "21321414",
       "notas": "",
       "id": 4
+    },
+    {
+      "nombre": "thompson",
+      "empresa": "Aventon",
+      "email": "test@test.com",
+      "telefono": "1234567",
+      "notas": "Probando",
+      "id": 5
+    },
+    {
+      "nombre": "lukather",
+      "empresa": "Estacion Central",
+      "email": "test100@test.com",
+      "telefono": "21321414",
+      "notas": "",
+      "id": 6
     }
   ]
 }

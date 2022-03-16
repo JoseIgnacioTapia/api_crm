@@ -6,18 +6,22 @@ import NuevoCliente from './paginas/NuevoCliente';
 import EditarCliente from './paginas/EditarCliente';
 import VerCliente from './paginas/VerCliente';
 
-function App() {
+import { Provider } from 'react-redux';
+import store from './store';
 
+function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/clientes" element={<Layout />}>
-          <Route index element={<Inicio />} />
-          <Route path="nuevo" element={<NuevoCliente />} />
-          <Route path="editar/:id" element={<EditarCliente />} />
-          <Route path=":id" element={<VerCliente />} />
-        </Route>
-      </Routes>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/clientes" element={<Layout />}>
+            <Route index element={<Inicio />} />
+            <Route path="nuevo" element={<NuevoCliente />} />
+            <Route path="editar/:id" element={<EditarCliente />} />
+            <Route path=":id" element={<VerCliente />} />
+          </Route>
+        </Routes>
+      </Provider>
     </BrowserRouter>
   );
 }

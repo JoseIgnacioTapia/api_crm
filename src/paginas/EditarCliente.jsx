@@ -1,26 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { obtenerClienteEditar } from '../actions/clienteActions';
 import Formulario from '../components/Formulario';
 
 const EditarCliente = () => {
-  const [cliente, setCliente] = useState({});
-  const [cargando, setCargando] = useState(true);
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const obtenerClienteAPI = async () => {
-      try {
-        const url = `${import.meta.env.VITE_API_URL}/${id}`;
-        const respuesta = await fetch(url);
-        const resultado = await respuesta.json();
-        setCliente(resultado);
-      } catch (error) {
-        console.log(error);
-      }
-      setCargando(false);
-    };
+    const obtenerClienteAPI = () => dispatch(obtenerClienteEditar(id));
     obtenerClienteAPI();
   }, []);
+
+  // Obtenemos el state
+  const cliente = useSelector(state => state.clientes.clienteEditar);
+  const cargando = useSelector(state => state.clientes.loading);
 
   return (
     <>

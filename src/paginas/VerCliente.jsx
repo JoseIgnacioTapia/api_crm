@@ -1,31 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { obtenerClienteAction } from '../actions/clienteActions';
 import Spinner from '../components/Spinner';
 
 const VerClientes = () => {
-  const [cliente, setCliente] = useState({});
-  const [cargando, setCargando] = useState(false);
-
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    setCargando(!cargando);
-
-    const obtenerCLienteAPI = async () => {
-      try {
-        const url = `${import.meta.env.VITE_API_URL}/${id}`;
-        const respuesta = await fetch(url);
-        const resultado = await respuesta.json();
-        setCliente(resultado);
-      } catch (error) {
-        console.log(error);
-      }
-
-      setCargando(false);
-    };
+    const obtenerCLienteAPI = () => dispatch(obtenerClienteAction(id));
 
     obtenerCLienteAPI();
   }, []);
+
+  // Obtener el state
+  const cliente = useSelector(state => state.clientes.cliente);
+  const cargando = useSelector(state => state.clientes.loading);
 
   console.log(cargando);
 
